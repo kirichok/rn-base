@@ -9,6 +9,7 @@ import {
 
 import {create, value, font, color, PT} from './styles';
 import CustomIcon, {IconType} from './Icon';
+import CustomImage from './Image';
 
 const defProps = {
     children: null,
@@ -33,7 +34,7 @@ const defPropTypes = {
 };
 
 /**
- * Custom
+ * Custom  Button component
  * */
 
 function Custom(props) {
@@ -92,43 +93,59 @@ function Icon(props) {
 
 Icon.defaultProps = {
     ...defProps,
-
-    icon: CustomIcon.defProps,
+    icon: CustomIcon.Custom.defaultProps
 };
 Icon.propTypes = {
     ...defPropTypes,
-
-    icon: PropTypes.shape(CustomIcon.defPropTypes),
+    icon: PropTypes.shape(CustomIcon.Custom.PropTypes),
 };
 Icon.displayName = 'Button:Icon';
 
 /**
- * Icon as Button
+ * Image as Button
  * */
 
 function Image(props) {
-    const imageStyle = [styles.image, props.imageStyle];
+    const imageStyle = [styles.image, props.image.style];
 
     return <Custom {...props}>
-
+        <CustomImage.Custom {...props.image} style={imageStyle}/>
     </Custom>
 }
 
 Image.defaultProps = {
     ...defProps,
-
-    image: {
-        name: '',
-        style: null
-    },
+    image: CustomImage.Custom.defaultProps,
 };
 Image.propTypes = {
     ...defPropTypes,
-
-    image: PropTypes.string,
-    imageStyle: PT.objectOrNumber,
+    image: PropTypes.shape(CustomImage.Custom.PropTypes),
 };
 Image.displayName = 'Button:Image';
+
+/**
+ * Icon as Button
+ * */
+
+function BackgroundImage(props) {
+    const imageStyle = [styles.image, props.image.style];
+
+    return <Custom {...props}>
+        <CustomImage.Background {...props.image} style={imageStyle}>
+            {props.children}
+        </CustomImage.Background>
+    </Custom>
+}
+
+BackgroundImage.defaultProps = {
+    ...defProps,
+    image: CustomImage.Background.defaultProps,
+};
+BackgroundImage.propTypes = {
+    ...defPropTypes,
+    image: PropTypes.shape(CustomImage.Background.PropTypes),
+};
+BackgroundImage.displayName = 'Button:BackgroundImage';
 
 /**
  * Default styles for Button
@@ -143,10 +160,12 @@ const styles = create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'hidden'
     },
     text: font.md.weight('400').color(color.button.text).get,
 
-    icon: {}
+    icon: {},
+    image: {}
 });
 
-export default {Custom, Text, Icon, Image};
+export default {Custom, Text, Icon, Image, BackgroundImage};

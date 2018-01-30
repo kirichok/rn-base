@@ -39,4 +39,4 @@ function Custom(props) {
 Custom.defaultProps = defProps;
 Custom.propTypes = defPropTypes;
 
-export default {Custom, defPropTypes, defProps};
+export default {Custom};

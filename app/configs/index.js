@@ -19,8 +19,7 @@ const PARAMS = {
         GOOGLE_API: '2',
         SERVER_API: 'http://prod.test.com/api/'
     },
-    get: (IS_DEV = false, additional = {}) => {
-        console.log('CONFIG.GET: call');
+    get (IS_DEV = false, additional = {}) {
         return {
             ...(IS_DEV ? this.DEV : this.PROD),
             ...additional,

@@ -11,10 +11,12 @@ import {
     Text,
     View,
     Animated,
-    Switch
+    Switch,
 } from 'react-native';
 
 import Button from './app/components/Common/Button';
+import Image from './app/components/Common/Image';
+import TextInput from './app/components/Common/TextInput';
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -27,6 +29,8 @@ export default class App extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
+                <TextInput.Label />
+
                 <Text style={styles.welcome}>
                     Welcome to React Native!
                 </Text>
@@ -39,6 +43,29 @@ export default class App extends Component<{}> {
 
                 <Button.Text onPress={() => {}}/>
                 <Button.Icon onPress={() => {}}/>
+                <Button.Image onPress={() => {}}/>
+                <Button.Image image={{source: 'react'}} onPress={() => {}}/>
+                <Button.BackgroundImage
+                    style={{
+                        marginHorizontal: 30
+                    }}
+                    height={60}
+                    image={{
+                        uri: 'https://www.google.com.ua/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+                        mode: 'contain'
+                    }}
+                    onPress={() => {}}
+                >
+                    <View/>
+                </Button.BackgroundImage>
+
+                <Image.Background
+                    height={100}
+                    uri={'https://www.google.com.ua/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'}
+                    mode={'contain'}
+                >
+                    <Text>Hello</Text>
+                </Image.Background>
 
                 <Switch value={true}/>
                 <Switch value={false}/>
