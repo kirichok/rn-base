@@ -38,5 +38,4 @@ const params = {
 
 export default PARAMS.get(true, params);
 
-
-
+export {defFonts, defStyles} from './styles';

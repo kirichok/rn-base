@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {StyleSheet, Dimensions} from 'react-native';
-import config from '../../configs';
+import config, {defStyles, defFonts} from '../../configs';
 import PropTypes from 'prop-types';
 
 /**
@@ -103,36 +103,30 @@ export const value = (v) => {
  * }
  * */
 
-const FONT_SIZE_SM = 10,
-    FONT_SIZE_DEF = 16,
-    FONT_SIZE_MD = 20,
-    FONT_SIZE_LG = 30,
-    FONT_SIZE_XL = 40;
-
 export const font = {
     _value: {
         fontFamily: config.isIOS
             ? 'System'
             : 'sans-serif',
-        fontSize: value(FONT_SIZE_DEF),
+        fontSize: value(defFonts.size.default),
         fontWeight: 'normal',
-        color: '#4a4a4a'
+        color: defFonts.color.default
     },
 
     get sm() {
-        return this.size(FONT_SIZE_SM);
+        return this.size(defFonts.size.sm);
     },
 
     get md() {
-        return this.size(FONT_SIZE_MD);
+        return this.size(defFonts.size.md);
     },
 
     get lg() {
-        return this.size(FONT_SIZE_LG);
+        return this.size(defFonts.size.lg);
     },
 
     get xl() {
-        return this.size(FONT_SIZE_XL);
+        return this.size(defFonts.size.xl);
     },
 
     get bold() {
@@ -170,9 +164,9 @@ export const font = {
             fontFamily: config.isIOS
                 ? 'System'
                 : 'sans-serif',
-            fontSize: value(FONT_SIZE_DEF),
+            fontSize: value(defFonts.color.default),
             fontWeight: 'normal',
-            color: '#4a4a4a'
+            color: defFonts.color.default
         }
     }
 };

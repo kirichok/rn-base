@@ -4,8 +4,10 @@ import {
     Animated,
     TextInput as RNTextInput,
 } from 'react-native';
-import {Row, Col} from "./Base";
-import {PT, value} from './styles';
+
+import {defStyles} from '../../configs';
+import {PT} from './styles';
+import Label from './Label';
 
 /**
  * Custom TextInput component
@@ -46,27 +48,13 @@ function Custom(props) {
     />
 }
 
-class Label extends Component {
+class Label1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
             focused: false,
-
         }
     }
-
-    componentWillMount() {
-        this._focused = new Animated.Value(this.getText() ? 0 : 1);
-    }
-
-    componentDidUpdate() {
-        Animated.timing(this._focused, {
-            toValue: this.state.focused ? 1 : 0,
-            duration: 200,
-        }).start();
-    }
-
-    getText = () => '' + this.props.text;
 
     onFocus = () => {
         this.setState({focused: true});
@@ -77,50 +65,28 @@ class Label extends Component {
     };
 
     render() {
-        const {
-            label = 'Label',
+        return <Label.Floating
+            focused={this.state.focused}
+            text={{
+                inline: 'Inline Label',
+                focus: 'Label',
+            }}
 
-        } = this.props;
-
-        const style = {
-            position: 'absolute',
-            left: 0,
-            top: this._focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: [18, 0],
-            }),
-            fontSize: this._focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: [20, 14],
-            }),
-            color: this._focused.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['#aaa', '#000'],
-            }),
-        };
-
-        return <Row>
-            <Col style={{
-                flex: 1,
-                paddingTop: value(20)
-            }}>
-                <Animated.Text style={style}>{label}</Animated.Text>
-                <Custom
-                    onChange={() => {}}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlur}
-                />
-            </Col>
-        </Row>;
+            floating={defStyles.label}
+        >
+            <Custom
+                onChange={() => {
+                }}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+            />
+        </Label.Floating>;
     }
 }
 
 
-
 const styles = {
-    input: {
-
-    },
+    input: {},
 
 };
 
@@ -147,6 +113,6 @@ const defPropTypes = {
 };
 
 Custom.defaultProps = defProps;
-Custom.PropTypes = defPropTypes;
+Custom.propTypes = defPropTypes;
 
-export default {Custom, Label}
+export default {Custom, Label1}

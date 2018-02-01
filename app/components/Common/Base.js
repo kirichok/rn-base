@@ -16,13 +16,19 @@ const styles = create({
         flexDirection: 'row',
         alignItems: 'center'
     },
+
+    flex: {
+        flex: 1
+    }
 });
 
 export function Row({style = {}, children = null}) {
     return <View style={[styles.row, style]}>{children}</View>
 }
 
-export function Col({style = {}, children = null}) {
-    return <View style={[styles.col, style]}>{children}</View>
+export function Col({style = {}, flex = false, children = null}) {
+    return <View style={[styles.col, flex ? styles.flex : {}, style]}>
+        {children}
+    </View>
 }
 

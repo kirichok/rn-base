@@ -14,6 +14,7 @@ import {
     Switch,
 } from 'react-native';
 
+import {Col, Row} from './app/components/Common/Base';
 import Button from './app/components/Common/Button';
 import Image from './app/components/Common/Image';
 import TextInput from './app/components/Common/TextInput';
@@ -29,7 +30,7 @@ export default class App extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput.Label />
+                <TextInput.Label1/>
 
                 <Text style={styles.welcome}>
                     Welcome to React Native!
@@ -41,10 +42,31 @@ export default class App extends Component<{}> {
                     {instructions}
                 </Text>
 
-                <Button.Text onPress={() => {}}/>
-                <Button.Icon onPress={() => {}}/>
-                <Button.Image onPress={() => {}}/>
-                <Button.Image image={{source: 'react'}} onPress={() => {}}/>
+                <Button.Text
+                    radius={10}
+                    text={'Hello'}
+                    style={{
+                        marginHorizontal: 10
+                    }}
+                    onPress={emptyCall}
+                />
+                <Button.Icon onPress={emptyCall}/>
+
+
+
+
+                <Row>
+                    <Button.Image flex onPress={emptyCall}/>
+                    <Button.Image flex image={{source: 'react'}} onPress={emptyCall}/>
+                </Row>
+
+                <Col flex>
+                    <View style={{flex: 1, backgroundColor: 'red'}}/>
+                    <Button.Image onPress={emptyCall}/>
+                    <Button.Image image={{source: 'react'}} onPress={emptyCall}/>
+                </Col>
+
+
                 <Button.BackgroundImage
                     style={{
                         marginHorizontal: 30
@@ -54,7 +76,7 @@ export default class App extends Component<{}> {
                         uri: 'https://www.google.com.ua/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
                         mode: 'contain'
                     }}
-                    onPress={() => {}}
+                    onPress={emptyCall}
                 >
                     <View/>
                 </Button.BackgroundImage>
@@ -74,12 +96,15 @@ export default class App extends Component<{}> {
     }
 }
 
+function emptyCall() {
+
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+
+        backgroundColor: '#fff',
     },
     welcome: {
         fontSize: 20,

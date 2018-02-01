@@ -10,6 +10,7 @@ import {
 import {create, value, font, color, PT} from './styles';
 import CustomIcon, {IconType} from './Icon';
 import CustomImage from './Image';
+import {defStyles} from "../../configs";
 
 const defProps = {
     children: null,
@@ -21,7 +22,8 @@ const defProps = {
 
     activeOpacity: 0.75,
     height: value(40),
-    radius: 0
+    radius: 0,
+    flex: false
 };
 
 const defPropTypes = {
@@ -30,7 +32,8 @@ const defPropTypes = {
     disabled: PropTypes.bool,
     activeOpacity: PropTypes.number,
     height: PropTypes.number,
-    radius: PropTypes.number
+    radius: PropTypes.number,
+    flex: PropTypes.bool,
 };
 
 /**
@@ -39,7 +42,12 @@ const defPropTypes = {
 
 function Custom(props) {
     const onPress = props.disabled ? null : props.onPress,
-        style = [styles.wrap, {borderRadius: props.radius}, props.style],
+        style = [
+            styles.wrap,
+            props.flex ? styles.flex : {},
+            {borderRadius: props.radius},
+            props.style
+        ],
         container = [styles.container, {height: props.height}];
 
     return <TouchableOpacity activeOpacity={props.activeOpacity} style={style} onPress={onPress}>
@@ -152,6 +160,9 @@ BackgroundImage.displayName = 'Button:BackgroundImage';
  * */
 
 const styles = create({
+    flex: {
+        flex: 1
+    },
     wrap: {
         backgroundColor: color.button.background,
         flexDirection: 'row',
