@@ -6,13 +6,13 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {PT} from './styles';
 
 export const IconType = {
-    MaterialIcons: 1,
-    IonIcons: 2
+    Material: 1,
+    Ion: 2
 };
 
 const defProps = {
-    type: IconType.MaterialIcons,
-    name: 'home',
+    type: IconType.Material,
+    name: undefined,
     size: 20,
     color: '#000',
     style: {}
@@ -28,10 +28,10 @@ const defPropTypes = {
 
 function Custom(props) {
     switch (props.type) {
-        case IconType.MaterialIcons:
+        case IconType.Material:
             return <MaterialIcons {...props}/>;
 
-        case IconType.IonIcons:
+        case IconType.Ion:
             return <IonIcons {...props}/>;
     }
 }

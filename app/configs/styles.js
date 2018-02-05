@@ -17,9 +17,42 @@ const fonts = {
 };
 
 const styles = {
+    shadow: {
+        shadowColor: 'rgba(0, 0, 0, 0.04)',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 4,
+        shadowOpacity: 1,
+    },
+
+    sheet: {
+        backgroundColor: {
+            solid: 'rgb(243, 243, 243)',
+            opacity: 'rgba(243, 243, 243, 0.87)',
+        }
+    },
+
     text: {
         size: fonts.size.default,
-        color: fonts.color.default
+        color: fonts.color.default,
+
+        // TODO: Add shadow prop to TextInput & Text components
+        shadow: {
+            color: "rgba(0, 0, 0, 0.3)",
+            offset: {
+                width: 0,
+                height: 2
+            },
+            radius: 10
+        }
+    },
+
+    icon: {
+        mode: 'contain',
+        size: 20,
+        color: '#000',
     },
 
     label: {
@@ -40,9 +73,13 @@ const styles = {
     },
 
     button: {
+        activeOpacity: 0.75,
+        height: 40,
         borderRadius: 0,
+
         font: {
-            size: fonts.size.default
+            size: fonts.size.default,
+            weight: '400'
         },
         color: {
             active: {
@@ -54,6 +91,13 @@ const styles = {
                 font: fonts.color.white
             },
         },
+    },
+
+    switch: {
+        font: {
+            size: fonts.size.default,
+            color: fonts.color.default,
+        }
     },
 
     error: '#d0021b',

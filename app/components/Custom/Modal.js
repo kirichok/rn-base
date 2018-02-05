@@ -9,4 +9,3 @@ export function Modal({actions, children}) {
         {children}
     </Col>;
 }
-

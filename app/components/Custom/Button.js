@@ -20,9 +20,9 @@ const defProps = {
 
     style: {},
 
-    activeOpacity: 0.75,
-    height: value(40),
-    radius: 0,
+    activeOpacity: defStyles.button.activeOpacity,
+    height: value(defStyles.button.height),
+    radius: defStyles.button.borderRadius,
     flex: false
 };
 
@@ -43,7 +43,7 @@ const defPropTypes = {
 function Custom(props) {
     const onPress = props.disabled ? null : props.onPress,
         style = [
-            styles.wrap,
+            getWrapStyle(!props.disabled),
             props.flex ? styles.flex : {},
             {borderRadius: props.radius},
             props.style
@@ -72,7 +72,6 @@ function Text(props) {
         <RNText style={textStyle}>{props.text}</RNText>
     </Custom>
 }
-
 Text.defaultProps = {
     ...defProps,
 
@@ -95,17 +94,16 @@ function Icon(props) {
     const iconStyle = [styles.icon, props.icon.style];
 
     return <Custom {...props}>
-        <CustomIcon.Custom {...props.icon} style={iconStyle}/>
+        <CustomIcon {...props.icon} style={iconStyle}/>
     </Custom>
 }
-
 Icon.defaultProps = {
     ...defProps,
-    icon: CustomIcon.Custom.defaultProps
+    icon: CustomIcon.defaultProps
 };
 Icon.propTypes = {
     ...defPropTypes,
-    icon: PropTypes.shape(CustomIcon.Custom.PropTypes),
+    icon: PropTypes.shape(CustomIcon.PropTypes),
 };
 Icon.displayName = 'Button:Icon';
 
@@ -120,7 +118,6 @@ function Image(props) {
         <CustomImage.Custom {...props.image} style={imageStyle}/>
     </Custom>
 }
-
 Image.defaultProps = {
     ...defProps,
     image: CustomImage.Custom.defaultProps,
@@ -144,7 +141,6 @@ function BackgroundImage(props) {
         </CustomImage.Background>
     </Custom>
 }
-
 BackgroundImage.defaultProps = {
     ...defProps,
     image: CustomImage.Background.defaultProps,
@@ -163,20 +159,46 @@ const styles = create({
     flex: {
         flex: 1
     },
+
     wrap: {
-        backgroundColor: color.button.background,
+        backgroundColor: defStyles.button.color.active.background,
         flexDirection: 'row',
     },
+
+    wrapDisabled: {
+        backgroundColor: defStyles.button.color.disabled.background,
+        flexDirection: 'row',
+    },
+
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden'
     },
-    text: font.md.weight('400').color(color.button.text).get,
+
+    text: font
+        .size(defStyles.button.font.size)
+        .weight(defStyles.button.font.weight)
+        .color(defStyles.button.color.active.font)
+        .get,
+
+    textDisabled: font
+        .size(defStyles.button.font.size)
+        .weight(defStyles.button.font.weight)
+        .color(defStyles.button.color.disabled.font)
+        .get,
 
     icon: {},
     image: {}
 });
 
 export default {Custom, Text, Icon, Image, BackgroundImage};
+
+function getTextStyle(active) {
+    return active ? styles.text : styles.textDisabled;
+}
+
+function getWrapStyle(active) {
+    return active ? styles.wrap : styles.wrapDisabled;
+}

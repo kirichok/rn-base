@@ -11,17 +11,13 @@ import {
     Text,
     View,
     Animated,
+    Switch,
 } from 'react-native';
 
-import {
-    Col, Row,
-    Switch,
-    Button,
-    TextInput,
-    Image
-} from './app/components/Custom';
-
-import Search from './app/components/Search';
+import {Col, Row} from './app/components/Common/Base';
+import Button from './app/components/Common/Button';
+import Image from './app/components/Common/Image';
+import TextInput from './app/components/Common/TextInput';
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -31,10 +27,6 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
-    state = {
-        value: ''
-    };
-
     render() {
         return (
             <View style={styles.container}>
@@ -58,25 +50,11 @@ export default class App extends Component<{}> {
                     }}
                     onPress={emptyCall}
                 />
-
-                <Search.Input value={this.state.value} onChange={(value) => {
-                    this.setState({value});
-                }}/>
-
-                <Search.Bar value={this.state.value} onChange={(value) => {
-                    this.setState({value});
-                }}/>
-
-                <Button.Icon disabled onPress={emptyCall}/>
+                <Button.Icon onPress={emptyCall}/>
 
                 <Row>
                     <Button.Image flex onPress={emptyCall}/>
                     <Button.Image flex image={{source: 'react'}} onPress={emptyCall}/>
-                </Row>
-
-                <Row>
-                    <Switch flex value={true}/>
-                    <Switch flex value={true}/>
                 </Row>
 
                 <Col flex>
@@ -107,6 +85,9 @@ export default class App extends Component<{}> {
                 >
                     <Text>Hello</Text>
                 </Image.Background>
+
+                <Switch value={true}/>
+                <Switch value={false}/>
             </View>
         );
     }

@@ -14,7 +14,7 @@ const styles = create({
 
     row: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     flex: {

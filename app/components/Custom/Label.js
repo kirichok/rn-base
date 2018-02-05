@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Animated, Text} from 'react-native';
 import {Row, Col} from "./Base";
-import {color, create, font, value} from "./styles";
+import {color, create, font, value, PT} from "./styles";
 import {defStyles} from "../../configs";
 
 const defProps = {
@@ -12,17 +13,25 @@ const defProps = {
     fontStyleEmpty: font.md.get
 };
 
+const defPropTypes = {
+    text: PropTypes.string,
+    textEmpty: PropTypes.string,
+    style: PT.objectOrNumberOrArray,
+    fontStyle: PT.objectOrNumber,
+    fontStyleEmpty: PT.objectOrNumber
+};
+
 function Custom(props) {
-    const style = [styles.wrap, props.label.top]
-    return <Row>
-        <Col style={styles.wrap} >
+    const style = [styles.wrap, props.label.top];
+    return <Row style={props.style}>
+        <Col style={styles.wrap}>
             <Text style={props.fontStyle}>{props.text}</Text>
             <Row>{props.children}</Row>
         </Col>
     </Row>;
 }
-
 Custom.defaultProps = defProps;
+Custom.propTypes = defPropTypes;
 
 
 class Floating extends Component {
@@ -86,9 +95,7 @@ class Floating extends Component {
                 inline: 'I',
                 focus: 'F',
             },
-            style: {
-                top
-            },
+            style,
             height,
             children
         } = this.props;
@@ -97,11 +104,9 @@ class Floating extends Component {
             focused
         } = this.state;
 
-        const style = [styles.wrap, this.props.style];
-
         const wrap = height === defStyles.label.height ? styles.wrap : [styles.wrap, {paddingTop: height}];
 
-        return <Row>
+        return <Row style={style}>
             <Col style={wrap}>
                 <Animated.Text style={this.style}>{focused ? text.focus : text.inline}</Animated.Text>
                 {children}
@@ -121,6 +126,17 @@ Floating.defaultProps = {
     style: {}
 };
 
+Floating.propTypes = {
+    children: PropTypes.any,
+    focused: PropTypes.bool,
+    text: PropTypes.shape({
+        inline: PropTypes.string,
+        focus: PropTypes.string
+    }),
+    height: PropTypes.number,
+    floating: PropTypes.object,
+    style: PT.objectOrNumberOrArray
+};
 
 export default {Custom, Floating}
 

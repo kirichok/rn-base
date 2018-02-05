@@ -133,28 +133,23 @@ export const font = {
         return this.weight('bold');
     },
 
-    size(value) {
-        this._value.fontSize = value;
+    size(size) {
+        this._value.fontSize = value(size);
         return this;
     },
 
-    weight(value) {
-        this._value.fontWeight = value;
+    weight(weight) {
+        this._value.fontWeight = weight;
         return this;
     },
 
-    color(value) {
-        this._value.color = value;
-        return this;
-    },
-
-    colorDefault(value) {
+    color(color) {
         this._value.color = color;
         return this;
     },
 
     get get() {
-        const res = this._value;
+        const res = {...this._value};
         this._value = this.def();
         return res;
     },
@@ -164,7 +159,7 @@ export const font = {
             fontFamily: config.isIOS
                 ? 'System'
                 : 'sans-serif',
-            fontSize: value(defFonts.color.default),
+            fontSize: value(defFonts.size.default),
             fontWeight: 'normal',
             color: defFonts.color.default
         }
