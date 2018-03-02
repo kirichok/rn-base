@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -27,6 +27,23 @@ export function Header({actions, transparent = false, withShadow = false}) {
             )}
         </Row>
     </Row>
+}
+
+export class Form extends Component {
+
+    validator() {
+
+    }
+
+    render() {
+        const {
+            children
+        } = this.props;
+
+        return <Col style={styles.container}>
+            {children}
+        </Col>;
+    }
 }
 
 const styles = create({

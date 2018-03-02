@@ -1,6 +1,4 @@
-import React from 'react';
-
-import {View} from 'react-native';
+import React, {Component} from 'react';
 
 import {
     Row, Col,
@@ -10,6 +8,7 @@ import {
 } from "../Custom";
 
 import {IconType} from "../Custom/Icon";
+import {font} from "../Custom/styles";
 
 function Input({value = '', onChange = null, left = 'search', right = 'close', style = {}, rounded}) {
 
@@ -26,9 +25,12 @@ function Input({value = '', onChange = null, left = 'search', right = 'close', s
         <TextInput.Custom
             value={value}
             onChange={onChange}
-            style={{flex: 1}}
+            style={{flex: 1, ...font.size(16).get}}
+            onBlur={() => {
+                console.log('ON BLUR');
+            }}
         />
-        <Button.Icon
+        {/*<Button.Icon
             icon={{
                 size: 24,
                 type: IconType.Material,
@@ -40,7 +42,8 @@ function Input({value = '', onChange = null, left = 'search', right = 'close', s
                 width: 34,
                 height: 34
             }}
-        />
+            onPress={() => {onChange && onChange('')}}
+        />*/}
     </Row>
 }
 

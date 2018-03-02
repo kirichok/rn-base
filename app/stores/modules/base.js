@@ -22,10 +22,7 @@ export default class BaseModule {
             error: null,
             ...state
         };
-        this.createActions();
-    }
 
-    createActions() {
         this.ACTIONS = {
             GET: `${this.name}/get`,
             POST: `${this.name}/post`,
@@ -33,6 +30,10 @@ export default class BaseModule {
             DELETE: `${this.name}/delete`,
         };
 
+        this.createActions();
+    }
+
+    createActions() {
         this.GET = createAction(this.ACTIONS.GET, async (data) => await this.send('GET', data));
         this.POST = createAction(this.ACTIONS.POST, async (data) => await this.send('POST', data));
         this.PUT = createAction(this.ACTIONS.PUT, async (data) => await this.send('PUT', data));

@@ -11,6 +11,7 @@ import Label from './Label';
 
 // VALIDATOR
 // Phone: /^[+\(]*[0-9]{1,3}[-\s\.\(\]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]{7,10}$/g
+// NEW: ^[+\(]*[0-9]{1,3}[-\s\.\(]{0,2}[0-9]{1,3}[)\s\-]{0,1}[-\s\./0-9]{7,10}$
 // (541)754-3010
 // +1-541-754-3010
 // 1-541-754-3010
@@ -61,11 +62,13 @@ function Custom(props) {
 
         onFocus,
         onBlur,
+        //ref
     } = props;
 
     const style = [styles.input, props.style];
 
     return <RNTextInput
+        // ref={input => typeof ref === 'function' && ref(input)}
         value={'' + value}
         style={style}
 
@@ -81,6 +84,8 @@ function Custom(props) {
         secureTextEntry={secure}
         editable={editable}
         autoFocus={focus}
+
+        clearButtonMode={'while-editing'}
     />
 }
 

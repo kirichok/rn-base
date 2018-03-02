@@ -1,10 +1,13 @@
 import React from 'react';
 import {
+    Modal as RNModal
+} from 'react-native'
+import {
     Col,
     Row,
-} from './Component';
+} from './Base';
 
-export function Modal({actions, children}) {
+export function Modal({show, actions, children}) {
     return <Col>
         {children}
     </Col>;
