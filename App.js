@@ -40,6 +40,8 @@ export default class App extends Component<{}> {
             <View style={styles.container}>
                 <TextInput.Labeled/>
 
+                <TextInput.Masked mask={''}/>
+
                 <Text style={styles.welcome}>
                     Welcome to React Native!
                 </Text>

@@ -91,30 +91,32 @@ export default class BaseModule {
     };
 
     getReducer(state = this.initalState, {type, payload}) {
-        switch (true) {
-            case type.match(PENDING):
-                return {
-                    ...state,
-                    ...this.onPending(state, type.replace(PENDING, ''), payload),
-                    loading: true,
-                    error: false
-                };
+        if (type.split('/')[0] === this.name) {
+            switch (true) {
+                case type.match(FULFILLED) !== null:
+                    return {
+                        ...state,
+                        ...this.onFulfilled(state, type.replace(FULFILLED, ''), payload),
+                        loading: false,
+                        error: false
+                    };
 
-            case type.match(FULFILLED):
-                return {
-                    ...state,
-                    ...this.onFulfilled(state, type.replace(FULFILLED, ''), payload),
-                    loading: false,
-                    error: false
-                };
+                case type.match(PENDING) !== null:
+                    return {
+                        ...state,
+                        ...this.onPending(state, type.replace(PENDING, ''), payload),
+                        loading: true,
+                        error: false
+                    };
 
-            case type.match(REJECTED):
-                return {
-                    ...state,
-                    ...this.onRejected(state, type.replace(REJECTED, ''), payload),
-                    loading: false,
-                    error: payload
-                };
+                case type.match(REJECTED) !== null:
+                    return {
+                        ...state,
+                        ...this.onRejected(state, type.replace(REJECTED, ''), payload),
+                        loading: false,
+                        error: payload
+                    };
+            }
         }
         return state;
     }
