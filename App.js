@@ -30,14 +30,27 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+
+class GetChildsName extends Component {
+    render() {
+
+        // console.log(Array.isArray(this.props.children) && this.props.children.map(child => child.type.displayName));
+
+        return <View style={styles.container}>
+            {this.props.children}
+        </View>
+    }
+}
+
 export default class App extends Component<{}> {
     state = {
         value: ''
     };
 
     render() {
+        console.log(Button.Text.styleBuilder());
         return (
-            <View style={styles.container}>
+            <GetChildsName >
                 <TextInput.Labeled/>
 
                 <TextInput.Masked mask={''}/>
@@ -55,9 +68,8 @@ export default class App extends Component<{}> {
                 <Button.Text
                     radius={10}
                     text={'Hello'}
-                    style={{
-                        marginHorizontal: 10
-                    }}
+                    style={Button.Text.styleBuilder()}
+                    // style={{marginHorizontal: 10}}
                     onPress={emptyCall}
                 />
 
@@ -109,7 +121,7 @@ export default class App extends Component<{}> {
                 >
                     <Text>Hello</Text>
                 </Image.Background>
-            </View>
+            </GetChildsName>
         );
     }
 }

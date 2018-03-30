@@ -46,7 +46,7 @@ function Custom(props) {
             getWrapStyle(!props.disabled),
             props.flex ? styles.flex : {},
             {borderRadius: props.radius},
-            props.style
+            props.style.button
         ],
         container = [styles.container, {height: props.height}];
 
@@ -59,24 +59,27 @@ function Custom(props) {
 
 Custom.defaultProps = defProps;
 Custom.propTypes = defPropTypes;
-Custom.displayName = 'Button:Custom';
+Custom.displayName = 'Button.Custom';
 
 /**
  * Button with text
  * */
 
 function Text(props) {
-    const textStyle = [styles.text, props.textStyle];
+    const textStyle = [styles.text, props.style.text/*, props.text*/];
+
+    console.log('DISPLAY NAME: ', props);
 
     return <Custom {...props}>
         <RNText style={textStyle}>{props.text}</RNText>
     </Custom>
 }
+
 Text.defaultProps = {
     ...defProps,
 
     text: 'Text',
-    textStyle: {}
+    textStyle: {},
 };
 Text.propTypes = {
     ...defPropTypes,
@@ -84,7 +87,15 @@ Text.propTypes = {
     text: PropTypes.string,
     textStyle: PT.objectOrNumber,
 };
-Text.displayName = 'Button:Text';
+Text.displayName = 'Button.Text';
+Text.styleBuilder = () => {
+    console.log('Style Builder', arguments);
+
+    return {
+        button: {marginHorizontal: 10},
+        text: {}
+    }
+};
 
 /**
  * Icon as Button
@@ -97,6 +108,7 @@ function Icon(props) {
         <CustomIcon {...props.icon} style={iconStyle}/>
     </Custom>
 }
+
 Icon.defaultProps = {
     ...defProps,
     icon: CustomIcon.defaultProps
@@ -105,7 +117,7 @@ Icon.propTypes = {
     ...defPropTypes,
     icon: PropTypes.shape(CustomIcon.PropTypes),
 };
-Icon.displayName = 'Button:Icon';
+Icon.displayName = 'Button.Icon';
 
 /**
  * Image as Button
@@ -118,6 +130,7 @@ function Image(props) {
         <CustomImage.Custom {...props.image} style={imageStyle}/>
     </Custom>
 }
+
 Image.defaultProps = {
     ...defProps,
     image: CustomImage.Custom.defaultProps,
@@ -126,7 +139,7 @@ Image.propTypes = {
     ...defPropTypes,
     image: PropTypes.shape(CustomImage.Custom.PropTypes),
 };
-Image.displayName = 'Button:Image';
+Image.displayName = 'Button.Image';
 
 /**
  * Icon as Button
@@ -141,6 +154,7 @@ function BackgroundImage(props) {
         </CustomImage.Background>
     </Custom>
 }
+
 BackgroundImage.defaultProps = {
     ...defProps,
     image: CustomImage.Background.defaultProps,
@@ -149,7 +163,7 @@ BackgroundImage.propTypes = {
     ...defPropTypes,
     image: PropTypes.shape(CustomImage.Background.PropTypes),
 };
-BackgroundImage.displayName = 'Button:BackgroundImage';
+BackgroundImage.displayName = 'Button.BackgroundImage';
 
 /**
  * Default styles for Button

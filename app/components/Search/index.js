@@ -53,7 +53,7 @@ function Bar(props) {
 
         <Button.Text
             text={'Cancel'}
-            style={{width: 80}}
+            style={{button: {width: 80}}}
             onPress={() => {
             }}
         />

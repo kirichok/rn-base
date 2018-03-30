@@ -91,9 +91,9 @@ function Custom(props) {
         clearButtonMode={'while-editing'}
     />
 }
-
 Custom.defaultProps = defProps;
 Custom.propTypes = defPropTypes;
+Custom.displayName = 'TextInput';
 
 
 class Labeled extends Component {
@@ -132,6 +132,7 @@ Labeled.defaultProps = {
     ...defProps,
     label: Label.Floating.defaultProps
 };
+Labeled.displayName = 'TextInput.Labeled';
 
 
 class Masked extends Component {
