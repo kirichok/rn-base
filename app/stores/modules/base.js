@@ -124,7 +124,8 @@ export default class BaseModule {
 
 class EventModule extends BaseModule {
     constructor() {
-        super('/events', {});
+        super('/events', {
+        });
     }
 
     createActions() {
@@ -141,6 +142,13 @@ class EventModule extends BaseModule {
         }
 
         return super.getReducer();
+    }
+
+    async createSmth(data) {
+        this.POST(data);
+
+        await this.send('GET', data)
+        await this.send('PUT', data)
     }
 }
 
